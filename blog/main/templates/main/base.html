@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -12,9 +13,10 @@
 
 <nav>
     <ul>
-        <li><a href="{% url 'about_page'   %}">read smth ABOUT</a></li>
-        <li><a href="{% url 'home_page'   %}">return home/main</a> </li>
-        <li><a href="{% url 'posts_page'   %}">see all posts</a> </li>
+        <li><a href="{% url 'about_page'   %}">Read smth ABOUT</a></li>
+        <li><a href="{% url 'home_page'   %}">Return home/main</a> </li>
+        <li><a href="{% url 'posts_page'   %}">See all posts</a> </li>
+        <li><a href="{% url 'create_post'   %}">Create a new one</a> </li>
 
     </ul>
     

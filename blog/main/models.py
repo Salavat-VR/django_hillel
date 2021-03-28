@@ -17,8 +17,11 @@ class User(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField('The title of your masterpiece', max_length=50)
+    title = models.CharField('Title', max_length=50)
     description = models.CharField('Description', max_length=90)
-    content = models.TextField('Paste ors Write it here :) ')
+    content = models.TextField('Article')
     created = models.DateTimeField(auto_created=True)
     updated = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return self.title

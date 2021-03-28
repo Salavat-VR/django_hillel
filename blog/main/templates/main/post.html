@@ -10,7 +10,15 @@
 
 <div class="container">
     <h1>There are all posts:</h1>
+    <div class="payload">
+        <ul>
+            {% for post in posts %}
+            <li>{{ post }}</li>
+            {% endfor %}
+        </ul>
 
+
+    </div>
 
 
 </div>
