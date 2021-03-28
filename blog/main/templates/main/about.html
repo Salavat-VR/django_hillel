@@ -1,21 +1,33 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'main/base.html' %}
 
-<nav>
-    <ul>
-        <li><a href="">main page</a></li>
-        <li><a href="">information page</a></li>
-    </ul>
 
-</nav>
-    About
-</body>
-</html>
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h1>it is the best ABOUT page</h1>
+
+    <h2 style="color:#00b68a">Ода до Мельпомени</h2>
+    <p> Звій я пам’ятник свій. Довше, ніж мідь дзвінка,<br>
+        Вищий од пірамід царських, простоїть він.<br>
+        Дощ його не роз’їсть, не сколихне взимі,<br>
+        Впавши в лють, Аквілон; низка років стрімких —<br>
+        Часу біг коловий — в прах не зітре його.<br>
+        Смерті весь не скорюсь: не западе в імлу<br>
+        Частка краща моя. Поміж потомками<br>
+        Буду в славі цвісти, поки з Весталкою<br>
+        Йтиме понтифік-жрець до Капітолію.<br>
+        Там, де Авфід бурлить, де рільникам колись<br>
+        Давн за владаря був серед полів сухих,—<br>
+        Будуть знати, що й — славний з убогого —<br>
+        Вперше скласти зумів по-італійському<br>
+        Еолійські пісні. Горда по праву будь,<br>
+        Мельпомено, й звінчай, мило всміхаючись,<br>
+        Лавром сонячних Дельф нині й моє чоло.</p>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
