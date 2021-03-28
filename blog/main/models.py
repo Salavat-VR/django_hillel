@@ -20,7 +20,7 @@ class Post(models.Model):
     title = models.CharField('Title', max_length=50)
     description = models.CharField('Description', max_length=90)
     content = models.TextField('Article')
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=now)
 
     def __str__(self):

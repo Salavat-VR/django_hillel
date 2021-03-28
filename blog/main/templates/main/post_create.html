@@ -8,7 +8,7 @@
     <h1>Create your own post</h1>
 
     <div class="payload">
-        <form action="{ url 'post_create'}" method="POST">
+        <form method="POST">
             {% csrf_token %}
             {{form.title}}
             {{form.description}}

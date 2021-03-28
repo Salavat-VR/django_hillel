@@ -13,7 +13,16 @@
     <div class="payload">
         <ul>
             {% for post in posts %}
-            <li>{{ post }}</li>
+            <h2>{{ post.title }}</h2>
+
+            <p1>{{ post.description }} <br>
+            </p1>
+
+            <p>{{ post.content }} <br>
+            </p>
+
+
+            <hr>
             {% endfor %}
         </ul>
 

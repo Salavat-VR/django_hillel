@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 from .forms import PostForm
@@ -20,6 +21,7 @@ def post(request):
 def post_create(request):
     if request.method == "POST":
         form = PostForm(request.POST)
+        form.save()
     else:
         form = PostForm()
 
@@ -27,3 +29,8 @@ def post_create(request):
         'form': form,
     }
     return render(request, 'main/post_create.html', context=context)
+
+
+def post_api(request):
+    data = list(Post.objects.values())
+    return JsonResponse(data, safe=False)
