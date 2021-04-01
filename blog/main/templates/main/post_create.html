@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Dmytro | Adding post{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Create your own post</h1>
+
+    <div class="payload">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.title}}
+            {{form.description}}
+            {{form.content}}
+            <button class="btn btn-success">Save</button>
+        </form>
+
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
