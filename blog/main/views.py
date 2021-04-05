@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from .forms import PostForm
-from .models import Post
+from .forms import PostForm, SubsForm
+from .models import Post, Subscriber, Author
 
 
 def index(request):
@@ -34,3 +34,26 @@ def post_create(request):
 def post_api(request):
     data = list(Post.objects.values())
     return JsonResponse(data, safe=False)
+
+
+def all_subs(request):
+    data = list(Subscriber.objects.values())
+    return JsonResponse(data, safe=False)
+
+
+def all_authors(request):
+    data = list(Author.objects.values())
+    return JsonResponse(data, safe=False)
+
+
+def api_subscribe(request):
+    if request.method == "POST":
+        form = SubsForm(request.POST)
+        form.save()
+    else:
+        form = SubsForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'main/subscribe.html', context=context)

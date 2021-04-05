@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Dmytro | Subscribe page{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Subscribe to author</h1>
+
+    <div class="payload">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.author}}
+            {{form.email_to}}
+            <button class="btn btn-success">Save</button>
+        </form>
+
+
+
+    </div>
+
+
+</div>{% endblock %}
+

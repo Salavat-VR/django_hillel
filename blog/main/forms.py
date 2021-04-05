@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea
 
-from .models import Post
+from .models import Post, Subscriber
 
 
 class PostForm(ModelForm):
@@ -21,3 +21,20 @@ class PostForm(ModelForm):
                 "placeholder": "Paste or Write it here :) ",
             }),
         }
+
+
+class SubsForm(ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ["email_to", "author"]
+        widgets = {
+            "email_to": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Email to notify you about author's new articles",
+            }),
+            "author": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Type the id of author you wanna subscribe",
+            }),
+        }
+
