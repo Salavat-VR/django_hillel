@@ -37,4 +37,3 @@ class SubsForm(ModelForm):
                 "placeholder": "Type the id of author you wanna subscribe",
             }),
         }
-

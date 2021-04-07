@@ -11,5 +11,4 @@ urlpatterns = [
     path('api/subscribe', views.api_subscribe, name='api_subscribe'),
     path('api/all_subs', views.all_subs, name='all_subs'),
     path('api/all_authors', views.all_authors, name='all_authors')
-
 ]
