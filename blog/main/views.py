@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from .forms import PostForm, SubsForm
-from .models import Post, Subscriber, Author
+from .models import Author, Post, Subscriber
 
 
 def index(request):

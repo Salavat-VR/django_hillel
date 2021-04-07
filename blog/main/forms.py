@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, Textarea
+from django.forms import ModelForm, Textarea, TextInput
 
 from .models import Post, Subscriber
 
