@@ -9,6 +9,8 @@
 
     <div class="payload">
         <form method="POST">
+            {{ err_my  }}
+
             {% csrf_token %}
             {{form.title}}
             {{form.description}}

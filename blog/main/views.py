@@ -1,32 +1,43 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import PostForm, SubsForm
-from .models import Post, Subscriber, Author
+from .models import Author, Post, Subscriber
 
 
 def index(request):
+    # some type of documentation
     return render(request, 'main/index.html')
 
 
 def about(request):
+    # some type of documentation
     return render(request, 'main/about.html', {'title': 'Dmytro | Lyrics page'})
 
 
 def post(request):
-    posts = Post.objects.all()
-    return render(request, 'main/post.html', {'title': "Dmytro | Posts", 'posts': posts})
+    # some type of documentation
+    return render(request, 'main/post.html', {'title': "Dmytro | Posts", 'posts': Post.objects.all()})
 
 
 def post_create(request):
-    if request.method == "POST":
+    """
+    :param request:
+    :return: the main page in case the post was created successfully
+    """
+    custom_error = ''
+    if request.method == '':
         form = PostForm(request.POST)
-        form.save()
+        if form.is_valid():
+            form.save()
+            return redirect('posts_page')
+        else:
+            custom_error = 'Oops! Something wrong..'
     else:
         form = PostForm()
-
     context = {
         'form': form,
+        'err_my': custom_error
     }
     return render(request, 'main/post_create.html', context=context)
 
@@ -44,6 +55,10 @@ def all_subs(request):
 def all_authors(request):
     data = list(Author.objects.values())
     return JsonResponse(data, safe=False)
+
+
+def create_author(request):
+    return 1
 
 
 def api_subscribe(request):
