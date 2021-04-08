@@ -26,8 +26,12 @@ class PostForm(ModelForm):
 class SubsForm(ModelForm):
     class Meta:
         model = Subscriber
-        fields = ["email_to", "author"]
+        fields = ["subs_name", "email_to", "author"]
         widgets = {
+            "subs_name": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Your name, sir/mis",
+            }),
             "email_to": TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Email to notify you about author's new articles",

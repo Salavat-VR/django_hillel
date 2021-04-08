@@ -38,13 +38,11 @@ def post_api(request):
 
 
 def all_subs(request):
-    data = list(Subscriber.objects.values())
-    return JsonResponse(data, safe=False)
+    return render(request, 'main/all_subs.html', {'data': Subscriber.objects.all()})
 
 
 def all_authors(request):
-    context = {'data': Author.objects}
-    return render(request, 'main/all_authors.html', context=context)
+    return render(request, 'main/all_authors.html', {'data': Author.objects.all()})
 
 
 def author_generate(request):
@@ -56,7 +54,9 @@ def author_generate(request):
 def api_subscribe(request):
     if request.method == "POST":
         form = SubsForm(request.POST)
-        form.save()
+        if form.is_valid():
+            form.save()
+            return redirect('api_subscribe')
     else:
         form = SubsForm()
 

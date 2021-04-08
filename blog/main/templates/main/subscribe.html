@@ -10,11 +10,11 @@
     <div class="payload">
         <form method="POST">
             {% csrf_token %}
+            {{form.subs_name}}
             {{form.author}}
             {{form.email_to}}
             <button class="btn btn-success">Save</button>
         </form>
-
 
 
     </div>

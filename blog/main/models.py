@@ -15,6 +15,7 @@ class Author(models.Model):
 
 
 class Subscriber(models.Model):
+    subs_name = models.CharField("subs name", max_length=50)
     email_to = models.EmailField("email_to")
     author = models.ForeignKey("Author", on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)

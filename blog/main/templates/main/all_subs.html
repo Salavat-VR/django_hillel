@@ -9,9 +9,9 @@
 {% block content %}
 
 <div class="container">
-    <h1>There are all authors</h1>
-    {% for author in data %}
-    <p1>{{ author.name }} -------------------------------- {{ author.email }} <br>
+    <h1>Subscribers</h1>
+    {% for subs in data %}
+    <p1>{{ subs.subs_name }} : follows the {{ subs.author }} ------------------------------- {{ subs.email_to }} <br>
     </p1>
     {% endfor %}
 
