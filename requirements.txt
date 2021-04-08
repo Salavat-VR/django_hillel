@@ -1,5 +1,6 @@
 asgiref==3.3.4
 Django==3.2
+django-debug-toolbar==3.2
 Faker==8.0.0
 flake8==3.9.0
 greenlet==1.0.0

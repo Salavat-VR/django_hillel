@@ -1,6 +1,7 @@
-from django.forms import ModelForm, Textarea, TextInput
+from django import forms
+from django.forms import ModelForm, Textarea, TextInput, Select
 
-from .models import Post, Subscriber
+from .models import Author, Post, Subscriber
 
 
 class PostForm(ModelForm):
@@ -24,6 +25,14 @@ class PostForm(ModelForm):
 
 
 class SubsForm(ModelForm):
+    author = forms.ModelChoiceField(
+        queryset=Author.objects.all().order_by('name'),
+        empty_label='Select an author to follow',
+        widget=forms.Select(attrs={
+            "class": "form-control",
+        }),
+    )
+
     class Meta:
         model = Subscriber
         fields = ["subs_name", "email_to", "author"]
@@ -32,12 +41,12 @@ class SubsForm(ModelForm):
                 "class": "form-control",
                 "placeholder": "Your name, sir/mis",
             }),
+            "author": Select(attrs={
+                "class": "form-control",
+                "placeholder": "Type the id of author you wanna subscribe",
+            }),
             "email_to": TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Email to notify you about author's new articles",
-            }),
-            "author": TextInput(attrs={
-                "class": "form-control",
-                "placeholder": "Type the id of author you wanna subscribe",
             }),
         }
