@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from faker import Faker
 
 from .forms import PostForm, SubsForm
@@ -43,13 +43,14 @@ def all_subs(request):
 
 
 def all_authors(request):
-    data = list(Author.objects.values())
-    return JsonResponse(data, safe=False)
+    context = {'data': Author.objects}
+    return render(request, 'main/all_authors.html', context=context)
 
 
 def author_generate(request):
     faker = Faker()
     Author(name=faker.name(), email=faker.email()).save()
+    return redirect('all_authors')
 
 
 def api_subscribe(request):

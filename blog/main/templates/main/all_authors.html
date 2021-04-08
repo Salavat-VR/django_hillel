@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+
+{{ title }}
+
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>There are all authors</h1>
+    {{ for authors in context }}
+    <p>authors.name</p>
+    <p>authors.email</p>
+    {{ endfor }}
+    </div>
+
+</div>
+
+
+{% endblock %}
