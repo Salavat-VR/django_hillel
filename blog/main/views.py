@@ -1,43 +1,33 @@
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
+from faker import Faker
 
 from .forms import PostForm, SubsForm
 from .models import Author, Post, Subscriber
 
 
 def index(request):
-    # some type of documentation
     return render(request, 'main/index.html')
 
 
 def about(request):
-    # some type of documentation
     return render(request, 'main/about.html', {'title': 'Dmytro | Lyrics page'})
 
 
 def post(request):
-    # some type of documentation
-    return render(request, 'main/post.html', {'title': "Dmytro | Posts", 'posts': Post.objects.all()})
+    posts = Post.objects.all()
+    return render(request, 'main/post.html', {'title': "Dmytro | Posts", 'posts': posts})
 
 
 def post_create(request):
-    """
-    :param request:
-    :return: the main page in case the post was created successfully
-    """
-    custom_error = ''
-    if request.method == '':
+    if request.method == "POST":
         form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('posts_page')
-        else:
-            custom_error = 'Oops! Something wrong..'
+        form.save()
     else:
         form = PostForm()
+
     context = {
         'form': form,
-        'err_my': custom_error
     }
     return render(request, 'main/post_create.html', context=context)
 
@@ -57,8 +47,9 @@ def all_authors(request):
     return JsonResponse(data, safe=False)
 
 
-def create_author(request):
-    return 1
+def author_generate(request):
+    faker = Faker()
+    Author(name=faker.name(), email=faker.email()).save()
 
 
 def api_subscribe(request):

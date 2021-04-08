@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput, Textarea
+from django.forms import ModelForm, Textarea, TextInput
 
 from .models import Post, Subscriber
 
@@ -37,4 +37,3 @@ class SubsForm(ModelForm):
                 "placeholder": "Type the id of author you wanna subscribe",
             }),
         }
-
