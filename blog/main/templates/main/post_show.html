@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Dmytro | Post #{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Post</h1>
+</div>
+<div class="payload">
+    <h2>{{ pst.title }}</h2>
+
+    <p1>{{ pst.description }} <br>
+    </p1>
+
+    <p>{{ pst.content }} <br>
+    </p>
+    <div class="update_link">
+        <a href="{% url 'post_update' post_id=pst.id %}">Edit post</a>
+    </div>
+
+    <p1><a href="{% url 'posts_page' %}">All posts</a></p1>
+</div>
+
+
+</div>
+
+
+{% endblock %}

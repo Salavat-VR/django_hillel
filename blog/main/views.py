@@ -1,9 +1,10 @@
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 
 from .forms import PostForm, SubsForm
 from .models import Author, Post, Subscriber
+from .post_service import post_find
 
 
 def index(request):
@@ -16,7 +17,7 @@ def about(request):
 
 def post(request):
     posts = Post.objects.all()
-    return render(request, 'main/post.html', {'title': "Dmytro | Posts", 'posts': posts})
+    return render(request, 'main/posts_all.html', {'title': "Dmytro | Posts", 'posts': posts})
 
 
 def post_create(request):
@@ -52,7 +53,7 @@ def author_generate(request):
 
 
 def api_subscribe(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = SubsForm(request.POST)
         if form.is_valid():
             form.save()
@@ -64,3 +65,27 @@ def api_subscribe(request):
         'form': form,
     }
     return render(request, 'main/subscribe.html', context=context)
+
+
+def post_update(request, post_id):
+    err = ''
+    pst = get_object_or_404(Post, pk=post_id)
+
+    if request.method == 'POST':
+        form = PostForm(instance=pst, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('posts_page')
+        else:
+            err = 'Error on update Post'
+    else:
+        form = PostForm(instance=pst)
+    context = {
+        'form': form,
+        'err': err,
+    }
+    return render(request, 'main/post_update.html', context=context)
+
+
+def post_show(request, post_id):
+    return render(request, 'main/post_show.html', {'title': post_find(post_id).title, 'pst': post_find(post_id)})

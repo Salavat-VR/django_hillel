@@ -13,7 +13,10 @@
     <div class="payload">
         <ul>
             {% for post in posts %}
-            <h2>{{ post.title }}</h2>
+            <h2>
+                <a href="{% url 'post_show' post_id=post.id %}">{{ post.title }}</a>
+            </h2>
+
 
             <p1>{{ post.description }} <br>
             </p1>
