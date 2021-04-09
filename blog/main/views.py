@@ -4,7 +4,9 @@ from faker import Faker
 
 from .forms import PostForm, SubsForm
 from .models import Author, Post, Subscriber
+
 from .post_service import post_find
+
 
 
 def index(request):
