@@ -1,18 +1,22 @@
 {% extends 'main/base.html' %}
 
 
-{% block title %}Dmytro | Subscribe page{% endblock %}
+{% block title %}Dmytro | Editing post{% endblock %}
 {% block content %}
 
 <div class="container">
-    <h1>Subscribe to author</h1>
+    <h1>Editing post</h1>
 
+    <div class="error">
+        {{ err }}
+    </div>
     <div class="payload">
         <form method="POST">
             {% csrf_token %}
-            {{form.subs_name}}
-            {{form.author}}
-            {{form.email_to}}
+
+            {{ form.title }}
+            {{ form.description }}
+            {{ form.content }}
             <button class="btn btn-success">Save</button>
         </form>
 
@@ -20,5 +24,7 @@
     </div>
 
 
-</div>{% endblock %}
+</div>
 
+
+{% endblock %}
