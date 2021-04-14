@@ -15,6 +15,23 @@
 
     <p>{{ pst.content }} <br>
     </p>
+
+    <h1> Comments </h1><br><br>
+
+    {% for cmt in cmts %}
+    <h2><a>name: {{ cmt.name }}</a><br></h2>
+        <a>comment: {{ cmt.body }}</a><br><br>
+    {% endfor %}
+
+
+    <form method="POST">
+        {% csrf_token %}
+        {{form.name}}
+        {{form.body}}
+        <button class="btn btn-success">Save</button>
+    </form>
+
+
     <div class="update_link">
         <a href="{% url 'post_update' post_id=pst.id %}">Edit post</a>
     </div>
