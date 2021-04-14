@@ -46,3 +46,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment by {} on {}'.format(self.name, self.post)
+
+
+class Logger(models.Model):
+    created = models.CharField('created time', max_length=20)
+    time_execution = models.CharField('created time', max_length=20)
+    path = models.TextField('path')
+    utm = models.CharField('utm', max_length=20)
+    i_p = models.CharField('utm', max_length=20)

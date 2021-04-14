@@ -90,8 +90,7 @@ def post_update(request, post_id):
 def post_show(request, post_id):
     pst = post_find(post_id)
     cmts = Comment.objects.filter(post=pst)
-    for cmt in cmts:
-        print(cmt)
+
     form = CommentForm(request.POST)
     if form.is_valid():
         com = form.save(commit=False)
