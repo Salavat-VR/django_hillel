@@ -55,7 +55,7 @@ class SubsForm(ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['name', 'body']
+        fields = ['name', 'body', 'post']
         widgets = {
             "name": TextInput(attrs={
                 "class": "form-control",

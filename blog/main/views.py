@@ -89,28 +89,20 @@ def post_update(request, post_id):
 
 def post_show(request, post_id):
     pst = post_find(post_id)
-    print(pst)
     cmts = Comment.objects.filter(post=pst)
     for cmt in cmts:
         print(cmt)
-
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-
-        if form.is_valid():
-            form.post = pst
-            form.save()
-            redirect('post_show', post_id=post_id)
-        else:
-            print("wrong!  "*5)
-    else:
-
-        form = CommentForm()
-        form.post = pst
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        com = form.save(commit=False)
+        com.post = pst
+        com.save()
+        return redirect('post_show', post_id=post_id)
 
     context = {
         'form': form,
         'title': pst.title,
         'pst': pst,
+        'cmts': cmts
     }
     return render(request, 'main/post_show.html', context=context)
