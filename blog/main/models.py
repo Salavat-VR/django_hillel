@@ -34,3 +34,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey('Post', null=True, blank=True, on_delete=models.CASCADE)
+    name = models.CharField('Name', max_length=80)
+    body = models.TextField('Body')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.name, self.post)

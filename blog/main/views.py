@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 
-from .forms import PostForm, SubsForm
-from .models import Author, Post, Subscriber
+from .forms import PostForm, SubsForm, CommentForm
+from .models import Author, Post, Subscriber, Comment
 from .post_service import post_find
 
 
@@ -88,4 +88,29 @@ def post_update(request, post_id):
 
 
 def post_show(request, post_id):
-    return render(request, 'main/post_show.html', {'title': post_find(post_id).title, 'pst': post_find(post_id)})
+    pst = post_find(post_id)
+    print(pst)
+    cmts = Comment.objects.filter(post=pst)
+    for cmt in cmts:
+        print(cmt)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            form.post = pst
+            form.save()
+            redirect('post_show', post_id=post_id)
+        else:
+            print("wrong!  "*5)
+    else:
+
+        form = CommentForm()
+        form.post = pst
+
+    context = {
+        'form': form,
+        'title': pst.title,
+        'pst': pst,
+    }
+    return render(request, 'main/post_show.html', context=context)
