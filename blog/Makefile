@@ -11,3 +11,6 @@ migrate:
 
 shell_plus:
 	python manage.py shell_plus --print-sql
+
+celery:
+	celery -A blog worker -l info

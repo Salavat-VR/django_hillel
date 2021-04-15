@@ -5,6 +5,7 @@ from faker import Faker
 from .forms import PostForm, SubsForm, CommentForm
 from .models import Author, Post, Subscriber, Comment
 from .post_service import post_find
+from .tasks import notification_by_email
 
 
 def index(request):
@@ -56,6 +57,9 @@ def api_subscribe(request):
     if request.method == 'POST':
         form = SubsForm(request.POST)
         if form.is_valid():
+
+            notification_by_email.delay()
+
             form.save()
             return redirect('api_subscribe')
     else:
