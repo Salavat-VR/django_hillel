@@ -2,7 +2,7 @@ from celery import shared_task
 
 # from time import sleep
 from .models import Logger, Subscriber
-from .notify_service import *
+from .notify_service import email_send
 
 
 @shared_task
