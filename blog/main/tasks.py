@@ -1,8 +1,7 @@
 from celery import shared_task
 
-# from time import sleep
 from .models import Logger, Subscriber
-from .notify_service import email_send
+from .notify_service import email_send, periodic_email
 
 
 @shared_task
@@ -26,4 +25,4 @@ def periodic_notification():
     subscribers = Subscriber.objects.all()
 
     for subscriber in subscribers:
-        email_send(subscriber.email_to, subscriber.author)
+        periodic_email(subscriber.email_to)

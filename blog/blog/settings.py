@@ -44,7 +44,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     'sending_email': {
         'task': 'main.tasks.periodic_notification',
-        'schedule': crontab(minute='*/2', hour='0')
+        'schedule': crontab(minute='0', hour='9')
     }
 
 }
