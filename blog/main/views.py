@@ -54,16 +54,22 @@ def author_generate(request):
 
 
 def api_subscribe(request):
+    subscribe_success = False
     if request.method == 'POST':
         form = SubsForm(request.POST)
         if form.is_valid():
-
-            notification_by_email.delay()
-
             form.save()
-            return redirect('api_subscribe')
+            subscribe_success = True
     else:
         form = SubsForm()
+
+    if subscribe_success:
+        email_to = request.POST.get('email_to')
+        author = request.POST.get('author')
+        # author = Author.objects.get(id=author_id)
+
+        notification_by_email.delay(email_to, author)
+        return redirect('api_subscribe')
 
     context = {
         'form': form,

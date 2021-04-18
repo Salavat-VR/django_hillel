@@ -12,5 +12,9 @@ migrate:
 shell_plus:
 	python manage.py shell_plus --print-sql
 
-celery:
+celery worker:
 	celery -A blog worker -l info
+
+
+celery worker:
+	celery -A blog beat -l info

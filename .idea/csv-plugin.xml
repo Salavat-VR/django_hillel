@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\blog\blog\settings.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\blog\main\apps.py">
           <value>
             <Attribute>
