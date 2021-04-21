@@ -3,8 +3,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 
 from .forms import PostForm, SubsForm, CommentForm
-from .models import Author, Post, Subscriber, Comment
+from .models import Author, Post, Subscriber, Comment, Book
 from .post_service import post_find
+from .tasks import notification_by_email
 
 
 def index(request):
@@ -43,7 +44,11 @@ def all_subs(request):
 
 
 def all_authors(request):
-    return render(request, 'main/all_authors.html', {'data': Author.objects.all()})
+    authors = Author.objects.all().prefetch_related('books')
+    context = {
+        'data': authors
+    }
+    return render(request, 'main/all_authors.html', context=context)
 
 
 def author_generate(request):
@@ -53,13 +58,22 @@ def author_generate(request):
 
 
 def api_subscribe(request):
+    subscribe_success = False
     if request.method == 'POST':
         form = SubsForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('api_subscribe')
+            subscribe_success = True
     else:
         form = SubsForm()
+
+    if subscribe_success:
+        email_to = request.POST.get('email_to')
+        author = request.POST.get('author')
+        # author = Author.objects.get(id=author_id)
+
+        notification_by_email.delay(email_to, author)
+        return redirect('api_subscribe')
 
     context = {
         'form': form,
@@ -105,3 +119,12 @@ def post_show(request, post_id):
         'cmts': cmts
     }
     return render(request, 'main/post_show.html', context=context)
+
+
+def all_books(request):
+    books = Book.objects.all().only('title', 'author').select_related('author')
+    context = {
+        'data': books
+    }
+
+    return render(request, 'main/all_books.html', context=context)

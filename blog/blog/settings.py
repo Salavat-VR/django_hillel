@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from celery.schedules import crontab
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -25,8 +27,27 @@ SECRET_KEY = 'ja(m85-*p9d65c$6x$87jx-5!zxl)=c%zo_qz!4r7u4ashkfhw'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# Celery conf
+CELERY_BROKER_URL = 'amqp://localhost'
+
+CELERY_TIMEZONE = "Europe/Kiev"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
 
 # Application definition
+
+
+CELERY_BEAT_SCHEDULE = {
+    'deleting_logs': {
+        'task': 'main.tasks.deleting_logs',
+        'schedule': crontab(minute='0', hour='1')
+    },
+    'sending_email': {
+        'task': 'main.tasks.periodic_notification',
+        'schedule': crontab(minute='0', hour='9')
+    }
+
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -120,3 +141,14 @@ STATIC_URL = '/static/'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# Kyoto Cliche
+
+
+EMAIL_HOST_USER = 'kyoto.cliche@gmail.com'
+EMAIL_HOST_PASSWORD = '12360000'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
