@@ -59,3 +59,11 @@ class Logger(models.Model):
 class Book(models.Model):
     title = models.CharField('Title', max_length=250)
     author = models.ForeignKey("Author", on_delete=models.CASCADE, related_name='books')
+    category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name='categories')
+
+
+class Category(models.Model):
+    category_option = models.CharField('Option', max_length=250)
+
+    def __str__(self):
+        return self.category_option

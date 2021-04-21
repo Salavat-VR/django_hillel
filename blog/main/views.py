@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 
 from .forms import PostForm, SubsForm, CommentForm
-from .models import Author, Post, Subscriber, Comment, Book
+from .models import Author, Post, Subscriber, Comment, Book, Category
 from .post_service import post_find
 from .tasks import notification_by_email
 
@@ -122,9 +122,18 @@ def post_show(request, post_id):
 
 
 def all_books(request):
-    books = Book.objects.all().only('title', 'author').select_related('author')
+    books = Book.objects.all().only('title', 'author', 'category').select_related('author', 'category')
     context = {
         'data': books
     }
 
     return render(request, 'main/all_books.html', context=context)
+
+
+def all_categories(request):
+    categories = Category.objects.all().prefetch_related('categories')
+    context = {
+        'data': categories
+    }
+
+    return render(request, 'main/all_categories.html', context=context)

@@ -24,8 +24,8 @@ urlpatterns = [
     path('api/all_authors', views.all_authors, name='all_authors'),
     path('author/generate', views.author_generate, name='author_generate'),
 
-
-    path('books/all', views.all_books, name='all_books')
+    path('books/all', views.all_books, name='all_books'),
+    path('categories/all', views.all_categories, name='all_categories')
 
 
 ]

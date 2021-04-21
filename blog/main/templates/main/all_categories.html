@@ -3,23 +3,21 @@
 {% block content %}
 <div>
     <div class="payload">
-        <h1>Books</h1>
+        <h1>Categories page</h1>
 
 
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col">Category</th>
+                <th scope="col">Category name</th>
+                <th scope="col">Quantity of categories book</th>
             </tr>
             </thead>
             <tbody>
-            {% for book in data %}
+            {% for category in data %}
             <tr>
-                <th scope="row">{{ book.title }}</th>
-                <td>{{ book.author }}</td>
-                <td>{{ book.category }}</td>
+                <td>{{ category.category_option }}</td>
+                <td>{{ category.categories.count }}</td>
             </tr>
             {% endfor %}
             </tbody>
