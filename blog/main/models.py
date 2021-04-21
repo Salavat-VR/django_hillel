@@ -54,3 +54,8 @@ class Logger(models.Model):
     path = models.TextField('path')
     utm = models.CharField('utm', max_length=20)
     i_p = models.CharField('utm', max_length=20)
+
+
+class Book(models.Model):
+    title = models.CharField('Title', max_length=250)
+    author = models.ForeignKey("Author", on_delete=models.CASCADE, related_name='books')

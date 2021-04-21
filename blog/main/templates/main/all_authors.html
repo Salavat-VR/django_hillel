@@ -1,21 +1,30 @@
 {% extends 'main/base.html' %}
 
-
-{% block title %}
-
-{{ title }}
-
-{% endblock %}
 {% block content %}
+<div>
+    <div class="payload">
+        <h1>There are all authors</h1>
 
-<div class="container">
-    <h1>There are all authors</h1>
-    {% for author in data %}
-    <p1>{{ author.name }} -------------------------------- {{ author.email }} <br>
-    </p1>
-    {% endfor %}
 
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Author name</th>
+                <th scope="col">Author email</th>
+                <th scope="col">Quantity of authors book</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for author in data %}
+            <tr>
+                <td>{{ author.name }}</td>
+                <td>{{ author.email }}</td>
+                <td>{{ author.books.count }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-
 
 {% endblock %}
