@@ -1,5 +1,3 @@
-import secrets
-
 from django.core.management import BaseCommand
 from faker import Faker
 from main.models import Author, Book, Category
@@ -15,7 +13,7 @@ class Command(BaseCommand):
         faker = Faker()
         for _ in range(200):
             Author(name=faker.name(), email=faker.email()).save()
-        for i in range(len(books_genres)-1):
+        for i in range(len(books_genres) - 1):
             Category(category_option=books_genres[i]).save()
         for i in range(400):
             author = Author.objects.order_by('?').first()
