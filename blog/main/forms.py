@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm, Select, Textarea, TextInput
 
-from .models import Author, Post, Subscriber, Comment, ContactUs
+from .models import Author, Post, Subscriber, Comment
 
 
 class PostForm(ModelForm):
@@ -65,4 +65,3 @@ class CommentForm(forms.ModelForm):
                 "placeholder": "Comment this article",
             }),
         }
-
