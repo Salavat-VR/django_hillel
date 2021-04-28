@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Dmytro | Feedback{% endblock %}
+{% block content %}
+
+<div class="container">
+    <h1>Contact us via email and get us know about something you really dont like about us </h1>
+
+    <form action="{% url 'contact-us' %}" method="POST">
+        {% csrf_token %}
+        Email {{form.email}}<br>
+        Subject {{form.subject}}<br>
+        Message {{form.message}}<br>
+        <button type="submit">Send</button>
+    </form>
+
+
+</div>
+
+
+{% endblock %}

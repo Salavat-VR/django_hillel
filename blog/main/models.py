@@ -67,3 +67,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_option
+
+
+class ContactUs(models.Model):
+    email = models.EmailField()
+    subject = models.CharField(max_length=120)
+    message = models.TextField()

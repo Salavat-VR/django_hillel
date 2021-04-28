@@ -1,9 +1,11 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 from faker import Faker
 
 from .forms import PostForm, SubsForm, CommentForm
-from .models import Author, Post, Subscriber, Comment, Book, Category
+from .models import Author, Post, Subscriber, Comment, Book, Category, ContactUs
 from .post_service import post_find
 from .tasks import notification_by_email
 
@@ -14,11 +16,6 @@ def index(request):
 
 def about(request):
     return render(request, 'main/about.html', {'title': 'Dmytro | Lyrics page'})
-
-
-def post(request):
-    posts = Post.objects.all()
-    return render(request, 'main/posts_all.html', {'title': "Dmytro | Posts", 'posts': posts})
 
 
 def post_create(request):
@@ -70,6 +67,7 @@ def api_subscribe(request):
     if subscribe_success:
         email_to = request.POST.get('email_to')
         author = request.POST.get('author')
+        print(author)
         # author = Author.objects.get(id=author_id)
 
         notification_by_email.delay(email_to, author)
@@ -89,7 +87,7 @@ def post_update(request, post_id):
         form = PostForm(instance=pst, data=request.POST)
         if form.is_valid():
             form.save()
-            return redirect('posts_page')
+            return redirect('post_lists')
         else:
             err = 'Error on update Post'
     else:
@@ -137,3 +135,14 @@ def all_categories(request):
     }
 
     return render(request, 'main/all_categories.html', context=context)
+
+
+class PostListView(ListView):
+    queryset = Post.objects.all()
+    template_name = 'main/posts_all.html'
+
+
+class ContactUsView(CreateView):
+    success_url = reverse_lazy('home_page')
+    model = ContactUs
+    fields = ('email', 'subject', 'message')

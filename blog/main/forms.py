@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm, Select, Textarea, TextInput
 
-from .models import Author, Post, Subscriber, Comment
+from .models import Author, Post, Subscriber, Comment, ContactUs
 
 
 class PostForm(ModelForm):
@@ -43,7 +43,6 @@ class SubsForm(ModelForm):
             }),
             "author": Select(attrs={
                 "class": "form-control",
-                "placeholder": "Type the id of author you wanna subscribe",
             }),
             "email_to": TextInput(attrs={
                 "class": "form-control",
@@ -66,3 +65,4 @@ class CommentForm(forms.ModelForm):
                 "placeholder": "Comment this article",
             }),
         }
+
