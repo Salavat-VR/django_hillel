@@ -11,12 +11,7 @@ def notification_by_email(email_to, author):
 
 @shared_task
 def deleting_logs():
-    for log in Logger.objects.all():
-        from datetime import datetime
-        today = datetime.today().strftime('%Y-%m-%d')
-        if log.created[8:10] + 3 < today[8:10]:
-            log.delete()
-
+    Logger.objects.all().delete()
     Logger.save()
 
 

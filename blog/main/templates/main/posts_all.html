@@ -12,7 +12,7 @@
     <h1>There are all posts:</h1>
     <div class="payload">
         <ul>
-            {% for post in posts %}
+            {% for post in post_list %}
             <h2>
                 <a href="{% url 'post_show' post_id=post.id %}">{{ post.title }}</a>
             </h2>

@@ -43,7 +43,6 @@ class SubsForm(ModelForm):
             }),
             "author": Select(attrs={
                 "class": "form-control",
-                "placeholder": "Type the id of author you wanna subscribe",
             }),
             "email_to": TextInput(attrs={
                 "class": "form-control",
