@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 
-from blog.main.models import Post
+from main.models import Post
 
 
 class Command(BaseCommand):
@@ -28,9 +28,5 @@ class Command(BaseCommand):
                 for part in x.findAll('p'):
                     partial_article = part.text.strip()
 
-            post = Post(article=article_title, description=' ', content=partial_article)
+            post = Post(title=article_title, description=' ', content=partial_article)
             post.save()
-
-        # for link in soup.find_all("h2", "href"):
-        #    article_request = requests.get(soup.find('href'))
-        #    soup = BeautifulSoup(article_request.content, 'html.parser')
