@@ -1,13 +1,16 @@
+from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from faker import Faker
+from xlsxwriter.workbook import Workbook
 
 from .forms import PostForm, SubsForm, CommentForm
 from .models import Author, Post, Subscriber, Comment, Book, Category, ContactUs
 from .post_service import post_find
 from .tasks import notification_by_email
+from .xlsx_service import get_simple_table_data
 
 
 def index(request):
@@ -135,6 +138,24 @@ def all_categories(request):
     }
 
     return render(request, 'main/all_categories.html', context=context)
+
+
+def load_posts_via_xlsx(request):
+    # create the HttpResponse object ...
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = "attachment; filename=all_posts.xlsx"
+
+    # .. and pass it into the XLSXWriter
+    book = Workbook(response, {'in_memory': True})
+    sheet = book.add_worksheet('all_posts')
+
+    data = get_simple_table_data()
+    for post in data:
+        sheet.write(''.format(post.id), ''.format(post.title))
+
+    book.close()
+
+    return response
 
 
 class PostListView(ListView):
