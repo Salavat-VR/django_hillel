@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, CreateView
 from faker import Faker
 from xlsxwriter.workbook import Workbook
@@ -140,22 +141,24 @@ def all_categories(request):
     return render(request, 'main/all_categories.html', context=context)
 
 
-def load_posts_via_xlsx(request):
-    # create the HttpResponse object ...
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = "attachment; filename=all_posts.xlsx"
+class PostXlsx(View):
 
-    # .. and pass it into the XLSXWriter
-    book = Workbook(response, {'in_memory': True})
-    sheet = book.add_worksheet('all_posts')
+    def get(self, request, *args, **kwargs):
+        # create the HttpResponse object ...
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = "attachment; filename=all_posts.xlsx"
 
-    data = get_simple_table_data()
-    for post in data:
-        sheet.write('{}'.format(post.id), '{}'.format(post.title))
+        # .. and pass it into the XLSXWriter
+        book = Workbook(response, {'in_memory': True})
+        sheet = book.add_worksheet('all_posts')
 
-    book.close()
+        data = get_simple_table_data()
+        for post in data:
+            sheet.write('{}'.format(post.id), '{}'.format(post.title))
 
-    return response
+        book.close()
+
+        return response
 
 
 class PostListView(ListView):
