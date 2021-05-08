@@ -151,7 +151,7 @@ def load_posts_via_xlsx(request):
 
     data = get_simple_table_data()
     for post in data:
-        sheet.write(''.format(post.id), ''.format(post.title))
+        sheet.write('{}'.format(post.id), '{}'.format(post.title))
 
     book.close()
 
