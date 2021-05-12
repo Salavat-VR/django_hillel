@@ -7,9 +7,11 @@ from django.views.generic import ListView, CreateView
 from faker import Faker
 from xlsxwriter.workbook import Workbook
 
+from .author_service import author_all
+from .category_service import category_all
 from .forms import PostForm, SubsForm, CommentForm
-from .models import Author, Post, Subscriber, Comment, Book, Category, ContactUs
-from .post_service import post_find
+from .models import Author, Post, Subscriber, Comment, Book, ContactUs
+from .post_service import post_find, post_all
 from .tasks import notification_by_email
 from .xlsx_service import get_simple_table_data
 
@@ -45,7 +47,7 @@ def all_subs(request):
 
 
 def all_authors(request):
-    authors = Author.objects.all().prefetch_related('books')
+    authors = author_all().prefetch_related('books')
     context = {
         'data': authors
     }
@@ -133,7 +135,7 @@ def all_books(request):
 
 
 def all_categories(request):
-    categories = Category.objects.all().prefetch_related('categories')
+    categories = category_all().prefetch_related('categories')
     context = {
         'data': categories
     }
@@ -162,7 +164,7 @@ class PostXlsx(View):
 
 
 class PostListView(ListView):
-    queryset = Post.objects.all()
+    queryset = post_all()
     template_name = 'main/posts_all.html'
 
 
