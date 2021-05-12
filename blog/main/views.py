@@ -7,9 +7,9 @@ from django.views.generic import CreateView, ListView
 from faker import Faker
 from xlsxwriter.workbook import Workbook
 
-from author_service import author_all
-from category_service import category_all
-from post_service import post_all, post_find
+from main.author_service import author_all
+from main.category_service import category_all
+from main.post_service import post_all, post_find
 from .forms import PostForm, SubsForm, CommentForm
 from .models import Author, Post, Subscriber, Comment, Book, ContactUs
 from .tasks import notification_by_email
