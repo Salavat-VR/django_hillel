@@ -3,15 +3,15 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView
+from django.views.generic import CreateView, ListView
 from faker import Faker
 from xlsxwriter.workbook import Workbook
 
-from .author_service import author_all
-from .category_service import category_all
+from author_service import author_all
+from category_service import category_all
+from post_service import post_all, post_find
 from .forms import PostForm, SubsForm, CommentForm
 from .models import Author, Post, Subscriber, Comment, Book, ContactUs
-from .post_service import post_find, post_all
 from .tasks import notification_by_email
 from .xlsx_service import get_simple_table_data
 
