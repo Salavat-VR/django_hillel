@@ -9,11 +9,11 @@
 </div>
 {{auth.name}}<br>
 <br>
-
+{% if request.user.is_authenticated %}
 <form action="{% url 'author_delete' author_id=auth.id %}" method="POST">
     {% csrf_token %}
     <button class="btn">Delete</button>
 </form>
-
+{% endif %}
 
 {% endblock %}
