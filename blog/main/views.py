@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -118,7 +117,6 @@ class AuthorDeleteView(DeleteView):
     model = Author
     pk_url_kwarg = "author_id"
     success_url = reverse_lazy('all_authors')
-
 
 
 def post_show(request, post_id):
