@@ -1,9 +1,10 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 from faker import Faker
 from xlsxwriter.workbook import Workbook
 
@@ -105,6 +106,19 @@ def post_update(request, post_id):
     return render(request, 'main/post_update.html', context=context)
 
 
+class PostDeleteView(DeleteView):
+    template_name = 'post_show.html'
+    model = Post
+    pk_url_kwarg = "post_id"
+    success_url = reverse_lazy('post_lists')
+
+
+class AuthorDeleteView(DeleteView, LoginRequiredMixin):
+    model = Author
+    success_url = reverse_lazy('all_authors')
+    template_name = 'main/all_authors.html'
+
+
 def post_show(request, post_id):
     pst = post_find(post_id)
     cmts = Comment.objects.filter(post=pst)
@@ -115,6 +129,20 @@ def post_show(request, post_id):
         com.post = pst
         com.save()
         return redirect('post_show', post_id=post_id)
+
+    context = {
+        'form': form,
+        'title': pst.title,
+        'pst': pst,
+        'cmts': cmts
+    }
+    return render(request, 'main/post_show.html', context=context)
+
+
+def author_show(request, author_id):
+    author = get_object_or_404(Author, author_id)
+
+    return redirect('author_show', post_id=post_id)
 
     context = {
         'form': form,

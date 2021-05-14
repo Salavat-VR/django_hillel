@@ -29,6 +29,10 @@ urlpatterns = [
     path('books/all', views.all_books, name='all_books'),
     path('categories/all', cache_page(60 * 15)(views.all_categories), name='all_categories'),
 
-    path('contact-us', views.ContactUsView.as_view(), name='contact-us')
+    path('contact-us', views.ContactUsView.as_view(), name='contact-us'),
+    path('post/delete/<int:post_id>', views.PostDeleteView.as_view(), name='post_delete'),
+    path(r'author/delete/(?P<post_id>[^/]+)/', views.AuthorDeleteView.as_view(), name='author_delete'),
+
+    path('author/show/<int:post_id>', views.author_show, name='author_show'),
 
 ]

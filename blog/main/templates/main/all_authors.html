@@ -22,8 +22,12 @@
                 <td>{{ author.books.count }}</td>
             </tr>
             {% endfor %}
+
             </tbody>
         </table>
+        <form action="{% url 'post_delete' post_id=pst.id %}" method="POST">
+            {% csrf_token %}
+            <button class="btn">Delete</button>
     </div>
 </div>
 
