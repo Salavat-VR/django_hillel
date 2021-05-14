@@ -33,14 +33,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'api_posts'   %}">posts.json format</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'api_posts'   %}">posts.json</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'api_subscribe'   %}">Subscribe to
                         author</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'all_subs'   %}">All subscribers</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'all_subs'   %}">All subs</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'all_authors'   %}">All authors</a>
@@ -59,9 +59,15 @@
                     <a class="nav-link active" aria-current="page" href="{% url 'contact-us'   %}">Feedback</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'load_posts_via_xlsx'   %}">Posts xlsx </a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'load_posts_via_xlsx'   %}">Posts
+                        xlsx </a>
                 </li>
-
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'account:my_profile' request.user.id  %}">Edit
+                        profile</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>

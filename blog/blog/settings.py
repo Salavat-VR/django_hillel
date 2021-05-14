@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'blog',
     'main',
     'debug_toolbar',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'blog.urls'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+AUTH_USER_MODEL = 'account.User'
 
 TEMPLATES = [
     {
