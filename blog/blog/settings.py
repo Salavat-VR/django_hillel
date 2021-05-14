@@ -85,6 +85,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'blog.urls'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
