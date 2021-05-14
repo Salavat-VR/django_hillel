@@ -31,8 +31,8 @@ urlpatterns = [
 
     path('contact-us', views.ContactUsView.as_view(), name='contact-us'),
     path('post/delete/<int:post_id>', views.PostDeleteView.as_view(), name='post_delete'),
-    path(r'author/delete/(?P<post_id>[^/]+)/', views.AuthorDeleteView.as_view(), name='author_delete'),
+    path(r'author/delete/<int:author_id>', views.AuthorDeleteView.as_view(), name='author_delete'),
 
-    path('author/show/<int:post_id>', views.author_show, name='author_show'),
+    path('author/show/<int:author_id>', views.author_show, name='author_show'),
 
 ]

@@ -113,10 +113,12 @@ class PostDeleteView(DeleteView):
     success_url = reverse_lazy('post_lists')
 
 
-class AuthorDeleteView(DeleteView, LoginRequiredMixin):
+class AuthorDeleteView(DeleteView):
+    template_name = 'author_show.html'
     model = Author
+    pk_url_kwarg = "author_id"
     success_url = reverse_lazy('all_authors')
-    template_name = 'main/all_authors.html'
+
 
 
 def post_show(request, post_id):
@@ -140,17 +142,12 @@ def post_show(request, post_id):
 
 
 def author_show(request, author_id):
-    author = get_object_or_404(Author, author_id)
-
-    return redirect('author_show', post_id=post_id)
+    author = get_object_or_404(Author, pk=author_id)
 
     context = {
-        'form': form,
-        'title': pst.title,
-        'pst': pst,
-        'cmts': cmts
+        'auth': author,
     }
-    return render(request, 'main/post_show.html', context=context)
+    return render(request, 'main/author_show.html', context=context)
 
 
 def all_books(request):

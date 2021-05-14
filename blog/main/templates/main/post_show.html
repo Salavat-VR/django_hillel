@@ -31,12 +31,12 @@
         <button class="btn btn-success">Save</button>
     </form>
 
-
+    {% if request.user.is_authenticated %}
     <form action="{% url 'post_delete' post_id=pst.id %}" method="POST">
-       {% csrf_token %}
-       <button class="btn">Delete</button>
-</form>
-
+        {% csrf_token %}
+        <button class="btn">Delete</button>
+    </form>
+    {% endif %}
 
 
     <div class="update_link">

@@ -17,7 +17,7 @@
             <tbody>
             {% for author in data %}
             <tr>
-                <td>{{ author.name }}</td>
+                <td><a href="{% url 'author_show' author_id=author.id %}">{{ author.name }}</a></td>
                 <td>{{ author.email }}</td>
                 <td>{{ author.books.count }}</td>
             </tr>
@@ -25,9 +25,6 @@
 
             </tbody>
         </table>
-        <form action="{% url 'post_delete' post_id=pst.id %}" method="POST">
-            {% csrf_token %}
-            <button class="btn">Delete</button>
     </div>
 </div>
 
