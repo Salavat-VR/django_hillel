@@ -65,7 +65,7 @@
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page"
-                       href="{% url 'account:my_profile' request.user.id  %}">Profile</a>
+                       href="{% url 'account:my_profile'  %}">Profile</a>
                 </li>
                 {% endif %}
             </ul>
