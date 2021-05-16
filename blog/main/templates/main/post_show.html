@@ -20,7 +20,7 @@
 
     {% for cmt in cmts %}
     <h2><a>name: {{ cmt.name }}</a><br></h2>
-        <a>comment: {{ cmt.body }}</a><br><br>
+    <a>comment: {{ cmt.body }}</a><br><br>
     {% endfor %}
 
 
@@ -30,6 +30,13 @@
         {{form.body}}
         <button class="btn btn-success">Save</button>
     </form>
+
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'post_delete' post_id=pst.id %}" method="POST">
+        {% csrf_token %}
+        <button class="btn">Delete</button>
+    </form>
+    {% endif %}
 
 
     <div class="update_link">

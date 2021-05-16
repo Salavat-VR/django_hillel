@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 from faker import Faker
 from xlsxwriter.workbook import Workbook
 
@@ -105,6 +105,20 @@ def post_update(request, post_id):
     return render(request, 'main/post_update.html', context=context)
 
 
+class PostDeleteView(DeleteView):
+    template_name = 'post_show.html'
+    model = Post
+    pk_url_kwarg = "post_id"
+    success_url = reverse_lazy('post_lists')
+
+
+class AuthorDeleteView(DeleteView):
+    template_name = 'author_show.html'
+    model = Author
+    pk_url_kwarg = "author_id"
+    success_url = reverse_lazy('all_authors')
+
+
 def post_show(request, post_id):
     pst = post_find(post_id)
     cmts = Comment.objects.filter(post=pst)
@@ -123,6 +137,15 @@ def post_show(request, post_id):
         'cmts': cmts
     }
     return render(request, 'main/post_show.html', context=context)
+
+
+def author_show(request, author_id):
+    author = get_object_or_404(Author, pk=author_id)
+
+    context = {
+        'auth': author,
+    }
+    return render(request, 'main/author_show.html', context=context)
 
 
 def all_books(request):

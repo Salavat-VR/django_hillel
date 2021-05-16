@@ -17,11 +17,12 @@
             <tbody>
             {% for author in data %}
             <tr>
-                <td>{{ author.name }}</td>
+                <td><a href="{% url 'author_show' author_id=author.id %}">{{ author.name }}</a></td>
                 <td>{{ author.email }}</td>
                 <td>{{ author.books.count }}</td>
             </tr>
             {% endfor %}
+
             </tbody>
         </table>
     </div>

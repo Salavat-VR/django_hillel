@@ -1,5 +1,5 @@
 [flake8]
-max-line-length=130
+max-line-length=400
 exclude=env,tests/*
 application-import-names=app
 import-order-style=google

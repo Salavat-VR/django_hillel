@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.core.cache import cache
 from django.db import models
 from django.utils.timezone import now
 
@@ -16,9 +15,7 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self, **kwargs):
-        super(self, **kwargs).save()
-        cache.delete(self.__class__.cache_key())
+    # in save: cache.delete(self.__class__.cache_key())
 
     @classmethod
     def cache_key(cls):
@@ -47,9 +44,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-    def save(self, **kwargs):
-        super(self, **kwargs).save()
 
     @classmethod
     def cache_key(cls):
@@ -89,9 +83,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_option
-
-    def save(self, **kwargs):
-        super(self, **kwargs).save()
 
     @classmethod
     def cache_key(cls):
