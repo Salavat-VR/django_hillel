@@ -6,4 +6,17 @@ gunicorn-run:
 
 nginx config:
 
-    *have to add*
+server {
+    listen 80 default_server;
+    listen {}
+    server_name 127.0.0.1;
+    
+    location /static/ {
+        root /home/dmytro/Desktop/wks/linux_venv/my_1st_django/static_content;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8081;
+    }
+}
+
