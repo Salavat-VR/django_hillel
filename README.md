@@ -5,8 +5,8 @@ gunicorn-run:
 
 
 nginx config:
-
-server {
+    
+    server {
     listen 80 default_server;
     listen {}
     server_name 127.0.0.1;
@@ -18,5 +18,5 @@ server {
     location / {
         proxy_pass http://127.0.0.1:8081;
     }
-}
+	}
 
