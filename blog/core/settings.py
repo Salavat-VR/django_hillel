@@ -19,6 +19,7 @@ from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # Quick-start development settings - unsuitable for production
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static-content', 'static')
 
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
