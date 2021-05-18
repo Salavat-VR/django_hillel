@@ -7,8 +7,8 @@ gunicorn-run:
 nginx config:
     
     server {
-    listen 80 default_server;
-    listen {}
+    listen 80;
+    listen [::]:80
     server_name 127.0.0.1;
     
     location /static/ {
