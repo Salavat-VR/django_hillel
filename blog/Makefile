@@ -10,6 +10,8 @@ collect-static:
 make_migrations:
 	$(MANAGE) makemigrations
 
+migrations_dry:
+	$(MANAGE)  makemigrations --check --dry-run
 
 migrate:
 	$(MANAGE) migrate
@@ -19,10 +21,6 @@ shell_plus:
 
 celery worker:
 	celery -A blog worker -l info
-
-
-celery worker:
-	celery -A blog beat -l info
 
 createsuperuser:
 	$(MANAGE) createsuperuser
