@@ -1,5 +1,3 @@
-import pytest
-
 from django.urls import reverse
 # @pytest.mark.skip(reason="I wanna skip that")
 # def test_skip():
@@ -33,11 +31,11 @@ def test_contact_us_post_empty(client):
     }
 
 
-def test_contact_us_fill_post(client):
+def test_contact_us_fill_post(client, faker_fixture):
     response = client.post(reverse("contact-us"), data={
-        'email': 'dmytro.shashkevych@ukr.net',
-        'subject': 'About math',
-        'message': 'I am passionate about ...'
+        'email': faker_fixture.email(),
+        'subject': faker_fixture.word(),
+        'message': faker_fixture.word()
     })
     assert response.status_code == 302
 
@@ -51,3 +49,4 @@ def test_contact_us_quantity(client):
     })
     assert response.status_code == 302
     assert ContactUs.objects.count() == before + 1
+

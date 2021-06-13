@@ -13,7 +13,7 @@ def email_send(email_to, author):
 
     send_mail(
         'urgent notification email',
-        f'Dear customer! You have subscribed on Author: {Author.objects.all().get(pk=author)}',
+        f'Dear customer! You have subscribed on Author: {author}',
         'kyoto.cliche@gmail.com',
         [email_to],
         fail_silently=False,
