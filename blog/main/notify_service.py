@@ -1,4 +1,4 @@
-from django.contrib.sites import requests
+import requests
 
 
 def notify(email_to, author_name):
@@ -23,7 +23,7 @@ def periodic_email(email_to):
 
     send_mail(
         'Email at 9 pm',
-        '{}'.format(requests.get('https://tproger.ru/wp-content/plugins/citation-widget/get-quote.php')),
+        '{}'.format(requests.get('https://tproger.ru/wp-content/plugins/citation-widget/get-quote.php').text),
         'kyoto.cliche@gmail.com',
         [email_to],
         # fail_silently=False,

@@ -1,5 +1,5 @@
 from main.models import Author
-from main.tasks import notification_by_email, deleting_logs
+from main.tasks import notification_by_email, deleting_logs, periodic_notification
 
 
 def test_notification_by_email(client, faker_fixture):
@@ -11,3 +11,7 @@ def test_notification_by_email(client, faker_fixture):
 
 def test_deleting_logs():
     deleting_logs()
+
+
+def test_periodic_notification():
+    periodic_notification()
