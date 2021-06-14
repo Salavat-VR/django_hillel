@@ -49,4 +49,3 @@ def test_contact_us_quantity(client):
     })
     assert response.status_code == 302
     assert ContactUs.objects.count() == before + 1
-

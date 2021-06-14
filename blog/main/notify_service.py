@@ -1,7 +1,5 @@
 from django.contrib.sites import requests
 
-from .models import Author
-
 
 def notify(email_to, author_name):
     email_send(email_to, author_name)

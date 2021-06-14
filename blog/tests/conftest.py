@@ -17,4 +17,3 @@ def my_first_fixture():
 @pytest.fixture(scope='function')
 def faker_fixture():
     yield Faker()
-
