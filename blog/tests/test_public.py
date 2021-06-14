@@ -12,6 +12,7 @@ from django.urls import reverse
 from main.forms import PostForm
 from main.models import ContactUs, Post
 
+
 def test_home_page(client):
     response = client.get(reverse("home_page"))
     assert response.status_code == 200
@@ -55,10 +56,8 @@ def test_contact_us_quantity(client):
 def test_valid_form(client, faker_fixture):
     some_random_words = requests.get('https://tproger.ru/wp-content/plugins/citation-widget/get-quote.php').text
     artificial_post = Post(title=faker_fixture.word(), description=faker_fixture.word(), content=some_random_words)
-    data = {
-            'title': artificial_post.title,
+    data = {'title': artificial_post.title,
             'description': artificial_post.description,
-            'content': artificial_post.content
-            }
+            'content': artificial_post.content}
     form = PostForm(data=data)
     assert form.is_valid()
