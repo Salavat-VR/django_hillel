@@ -62,6 +62,3 @@ def test_valid_form(client, faker_fixture):
             }
     form = PostForm(data=data)
     assert form.is_valid()
-
-
-

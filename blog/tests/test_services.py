@@ -1,6 +1,5 @@
 from main.author_service import author_all
 from main.category_service import category_all
-from main.logger_service import get_client_ip
 from main.notify_service import periodic_email
 
 

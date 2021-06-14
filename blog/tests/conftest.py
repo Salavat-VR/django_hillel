@@ -24,4 +24,3 @@ def faker_fixture():
 def my_live_server(request):
     request.getfixturevalue("my_first_fixture")
     return live_server(request)
-
