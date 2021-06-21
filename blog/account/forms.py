@@ -30,6 +30,6 @@ class UserRegistrationForm(forms.ModelForm):
         instance.is_active = False
 
         instance.save()
-        send_confirmation_email.delay(instance.pk)
+        send_confirmation_email.apply_async(args=[instance.id], countdown=10)
 
         return instance

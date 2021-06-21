@@ -1,5 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import UpdateView, CreateView
 
 from account.forms import UserRegistrationForm
@@ -23,3 +25,11 @@ class SignUpView(CreateView):
 
     def form_valid(self, form):
         return super().form_valid(form)
+
+
+class ActivateUserView(View):
+    def get(self, request, confirmation_token):
+        user = get_object_or_404(User, confirmation_token=confirmation_token)
+        user.is_active = True
+        user.save(update_fields=("is_active",))
+        return redirect("home_page")
