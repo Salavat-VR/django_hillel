@@ -20,3 +20,6 @@ class SignUpView(CreateView):
     form_class = UserRegistrationForm
     template_name = 'account/user_sign_up.html'
     success_url = reverse_lazy('home_page')
+
+    def form_valid(self, form):
+        return super().form_valid(form)

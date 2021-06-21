@@ -1,6 +1,7 @@
 from django import forms
 
 from account.models import User
+from account.tasks import send_confirmation_email
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -29,5 +30,6 @@ class UserRegistrationForm(forms.ModelForm):
         instance.is_active = False
 
         instance.save()
-        #  todo: send email
+        send_confirmation_email.delay(instance.pk)
+
         return instance

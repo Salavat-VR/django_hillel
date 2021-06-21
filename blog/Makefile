@@ -20,7 +20,7 @@ shell_plus:
 	$(MANAGE) shell_plus --print-sql
 
 celery worker:
-	celery -A blog worker -l info
+	celery -A core worker -l info
 
 createsuperuser:
 	$(MANAGE) createsuperuser
