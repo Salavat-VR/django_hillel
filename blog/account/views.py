@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import UpdateView, CreateView
 
-from account.forms import UserRegistrationForm
+from account.forms import UserRegistrationForm, ChangePasswordForm
 from account.models import User
 
 
@@ -33,3 +33,10 @@ class ActivateUserView(View):
         user.is_active = True
         user.save(update_fields=("is_active",))
         return redirect("home_page")
+
+
+class ChangePasswordView(CreateView):
+    queryset = User.objects.filter(is_active=True)
+    form_class = ChangePasswordForm
+    template_name = 'account/change_password.html'
+    success_url = reverse_lazy('home_page')

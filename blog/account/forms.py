@@ -33,3 +33,21 @@ class UserRegistrationForm(forms.ModelForm):
         send_confirmation_email.apply_async(args=[instance.id], countdown=10)
 
         return instance
+
+
+class ChangePasswordForm(forms.ModelForm):
+    current_password = forms.CharField(widget=forms.PasswordInput)
+    new_password = forms.CharField(widget=forms.PasswordInput)
+    confirm_new_password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ["current_password", "new_password", "confirm_new_password"]
+
+    def clean(self):
+        cleaned_data: dict = super().clean()
+
+        if cleaned_data["new_password"] != cleaned_data['confirm_new_password']:
+            self.add_error("confirm_new_password", "Password mismatch")
+
+        return cleaned_data
