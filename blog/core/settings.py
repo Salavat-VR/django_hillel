@@ -70,7 +70,8 @@ INSTALLED_APPS = [
     'core',
     'main',
     'debug_toolbar',
-    'account'
+    'account',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [
@@ -160,7 +161,7 @@ INTERNAL_IPS = [
 
 # Kyoto Cliche
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 EMAIL_HOST_USER = 'kyoto.cliche@gmail.com'
 EMAIL_HOST_PASSWORD = '12360000'
 EMAIL_HOST = 'smtp.gmail.com'

@@ -2,23 +2,19 @@
 
 
 {% block title %}Dmytro | Subscribe page{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="container">
     <h1>Subscribe to author</h1>
 
-    <div class="payload">
-        <form method="POST">
-            {% csrf_token %}
-            {{form.subs_name}}
-            {{form.author}}
-            {{form.email_to}}
-            <button class="btn btn-success">Save</button>
-        </form>
 
-
-    </div>
-
+    <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.subs_name | as_crispy_field }}
+    {{ form.author | as_crispy_field }}
+    {{ form.email_to | as_crispy_field }}
+    <button type="submit" class="btn btn-success">Save post</button>
+  </form>
 
 </div>{% endblock %}
-
