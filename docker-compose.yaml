@@ -1,0 +1,44 @@
+version: "3.5"
+
+services:
+  backend:
+    build: .
+    container_name: my_backend
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+    - "8222:8000"
+    volumes:
+    - ./:/srv/project
+    depends_on:
+      - memcache
+      - postgres
+      - rabbitmq
+
+    memcache:
+      build: .
+      container_name: memcache
+      tty: true
+      stdin_open: true
+      restart: always
+      ports:
+        - "8222:8000"
+
+    postgres:
+      build: .
+      container_name: postgres
+      tty: true
+      stdin_open: true
+      restart: always
+      ports:
+        - "8222:8000"
+
+    rabbitmq:
+      build: .
+      container_name: rabbitmq
+      tty: true
+      stdin_open: true
+      restart: always
+      ports:
+        - "8222:8000"
