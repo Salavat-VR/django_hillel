@@ -31,7 +31,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 # Celery conf
-CELERY_BROKER_URL = 'amqp://'
+CELERY_BROKER_URL = 'amqp://{}:{}@{}:5672//'.format(
+    os.environ.get('RABBITMQ_DEFAULT_PASS', 'guest'),
+    os.environ.get('RABBITMQ_DEFAULT_USER', 'guest'),
+    os.environ.get('RABBITMQ_DEFAULT_HOST', 'localhost'),
+)
 
 CELERY_TIMEZONE = "Europe/Kiev"
 CELERY_TASK_TRACK_STARTED = True
@@ -71,7 +75,7 @@ INSTALLED_APPS = [
     'main',
     'debug_toolbar',
     'account',
-    'crispy_forms'
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -160,8 +164,8 @@ INTERNAL_IPS = [
 ]
 
 # Kyoto Cliche
-
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 EMAIL_HOST_USER = 'kyoto.cliche@gmail.com'
 EMAIL_HOST_PASSWORD = '12360000'
 EMAIL_HOST = 'smtp.gmail.com'

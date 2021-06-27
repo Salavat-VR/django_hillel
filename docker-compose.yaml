@@ -10,35 +10,37 @@ services:
     ports:
     - "8222:8000"
     volumes:
-    - ./:/srv/project
+    - './:/srv/project'
     depends_on:
-      - memcache
-      - postgres
-      - rabbitmq
+      - memcached
+      - rabbitmq-2
+      - postrges
+    env_file: .env
 
-    memcache:
-      build: .
-      container_name: memcache
-      tty: true
-      stdin_open: true
-      restart: always
-      ports:
-        - "8222:8000"
+  memcached:
+    image: memcached:latest
+    container_name: memcached
+    tty: true
+    stdin_open: true
+    restart: always
 
-    postgres:
-      build: .
-      container_name: postgres
-      tty: true
-      stdin_open: true
-      restart: always
-      ports:
-        - "8222:8000"
+  rabbitmq-2:
+    image: rabbitmq:3.8-rc-management
+    container_name: rabbitmq-2
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file: .env
+    ports:
+    - "15672:15672"
 
-    rabbitmq:
-      build: .
-      container_name: rabbitmq
-      tty: true
-      stdin_open: true
-      restart: always
-      ports:
-        - "8222:8000"
+  postrges:
+    image: postgres:latest
+    container_name: my_db
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file: .env
+    ports:
+    - "5432:5432"
+

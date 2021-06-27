@@ -4,6 +4,7 @@ WSGI_PORT = 8081
 run:
 	$(MANAGE) runserver
 
+
 collect-static:
 	$(MANAGE) collectstatic
 
