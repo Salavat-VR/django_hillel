@@ -1,6 +1,4 @@
-from django.contrib.sites import requests
-
-from .models import Author
+import requests
 
 
 def notify(email_to, author_name):
@@ -13,7 +11,7 @@ def email_send(email_to, author):
 
     send_mail(
         'urgent notification email',
-        f'Dear customer! You have subscribed on Author: {Author.objects.all().get(pk=author)}',
+        f'Dear customer! You have subscribed on Author: {author}',
         'kyoto.cliche@gmail.com',
         [email_to],
         fail_silently=False,
@@ -25,7 +23,7 @@ def periodic_email(email_to):
 
     send_mail(
         'Email at 9 pm',
-        '{}'.format(requests.get('https://tproger.ru/wp-content/plugins/citation-widget/get-quote.php')),
+        '{}'.format(requests.get('https://tproger.ru/wp-content/plugins/citation-widget/get-quote.php').text),
         'kyoto.cliche@gmail.com',
         [email_to],
         # fail_silently=False,

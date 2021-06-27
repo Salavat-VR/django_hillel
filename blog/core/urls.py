@@ -17,10 +17,13 @@ import debug_toolbar
 from django.contrib import admin
 from django.urls import include, path
 
+from account import views
+
 urlpatterns = [
     path('__debug__', include(debug_toolbar.urls)),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('', include('account.urls')),
-
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup', views.SignUpView.as_view(), name='sign_up'),
 ]

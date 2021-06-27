@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 # Celery conf
-CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = 'amqp://'
 
 CELERY_TIMEZONE = "Europe/Kiev"
 CELERY_TASK_TRACK_STARTED = True

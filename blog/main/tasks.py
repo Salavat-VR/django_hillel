@@ -12,7 +12,6 @@ def notification_by_email(email_to, author):
 @shared_task
 def deleting_logs():
     Logger.objects.all().delete()
-    Logger.save()
 
 
 @shared_task

@@ -20,10 +20,16 @@ shell_plus:
 	$(MANAGE) shell_plus --print-sql
 
 celery worker:
-	celery -A blog worker -l info
+	celery -A core worker -l info
 
 createsuperuser:
 	$(MANAGE) createsuperuser
 
 gunicorn-run:
 	gunicorn -w 4 -b 0.0.0.0:$(WSGI_PORT) --chdir /home/dmytro/Desktop/wks/linux_venv/my_1st_django/blog core.wsgi --timeout 30 --log-level debug --max-requests 10000
+
+coverage:
+	coverage report --omit */venv/*
+
+tst:
+	pytest --cov=main --cov-report=html --cov-fail-under=60
