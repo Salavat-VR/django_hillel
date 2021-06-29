@@ -42,7 +42,7 @@ docker-build:
 #run container with name its_my_app and use f20f55700305 image + auto delete after stopping a container
 # 8222 - port in host 8000 - port in container
 docker-run:
-	sudo docker run --rm -t -d -p 8222:8000 --name my_app f20f55700305
+	sudo docker run --rm -t -d -p 8222:8111 --name my_app f20f55700305
 
 #change the name in prod.
 docker-stop:

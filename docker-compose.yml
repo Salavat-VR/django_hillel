@@ -4,16 +4,17 @@ services:
   backend:
     build: .
     container_name: my_backend
+    command: python src/manage.py runserver 0.0.0.0:8000
     tty: true
     stdin_open: true
     restart: always
     ports:
-    - "8222:8000"
+    - "8001:8000"
     volumes:
-    - './:/srv/project'
+    - ./:/srv/project
     depends_on:
       - memcached
-      - rabbitmq-2
+      - rabbitmq
       - postrges
     env_file: .env
 
@@ -24,9 +25,9 @@ services:
     stdin_open: true
     restart: always
 
-  rabbitmq-2:
+  rabbitmq:
     image: rabbitmq:3.8-rc-management
-    container_name: rabbitmq-2
+    container_name: rabbitmq
     tty: true
     stdin_open: true
     restart: always
