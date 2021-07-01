@@ -2,28 +2,15 @@
 
 
 {% block title %}Dmytro | Adding post{% endblock %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-
-<div class="container">
-    <h1>Create your own post</h1>
-
-    <div class="payload">
-        <form method="POST">
-            {{ err_my  }}
-
-            {% csrf_token %}
-            {{form.title}}
-            {{form.description}}
-            {{form.content}}
-            <button class="btn btn-success">Save</button>
-        </form>
-
-
-
-    </div>
-
-
-</div>
-
-
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.title | as_crispy_field }}
+    {{ form.description | as_crispy_field }}
+    {{ form.content | as_crispy_field }}
+    <button type="submit" class="btn btn-success">Save post</button>
+  </form>
 {% endblock %}
+

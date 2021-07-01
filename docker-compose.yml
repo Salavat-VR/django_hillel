@@ -1,0 +1,47 @@
+version: "3.5"
+
+services:
+  backend:
+    build: .
+    container_name: my_backend
+    command: python src/manage.py runserver 0.0.0.0:8000
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+    - "8001:8000"
+    volumes:
+    - ./:/srv/project
+    depends_on:
+      - memcached
+      - rabbitmq
+      - postrges
+    env_file: .env
+
+  memcached:
+    image: memcached:latest
+    container_name: memcached
+    tty: true
+    stdin_open: true
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:3.8-rc-management
+    container_name: rabbitmq
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file: .env
+    ports:
+    - "15672:15672"
+
+  postrges:
+    image: postgres:latest
+    container_name: my_db
+    tty: true
+    stdin_open: true
+    restart: always
+    env_file: .env
+    ports:
+    - "5432:5432"
+
