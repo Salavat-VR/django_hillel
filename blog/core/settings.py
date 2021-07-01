@@ -19,7 +19,9 @@ from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # Quick-start development settings - unsuitable for production
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static-content', 'static')
+
+# STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static-content', 'static')
+STATIC_ROOT = os.path.join('/tmp', 'static-content', 'static')
 
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -173,3 +175,14 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+if DEBUG:
+    import socket
+    DEBUG_TOOLBAR_PATCH_SETTINGS = True
+
+    INTERNAL_IPS = ['127.0.0.1']
+    ip = socket.gethostbyname(socket.gethostname())
+    ip = '.'.join(ip.split('.')[::-1])
+    ip = f'{ip}.1'
+    INTERNAL_IPS.append(ip)
