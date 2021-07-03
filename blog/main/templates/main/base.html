@@ -67,7 +67,9 @@
       <li class="nav-item"><a href="{% url 'about_page'   %}" class="nav-link font-weight-bold text-uppercase">About</a></li>
       <li class="nav-item"><a href="{% url 'contact-us'   %}" class="nav-link font-weight-bold text-uppercase">Contact</a></li>
         {% if request.user.is_authenticated %}
-        <li class="nav-item"><a href="{% url 'account:my_profile'  %}" class="nav-link font-weight-bold text-uppercase">Profile</a></li>
+        <li class="nav-item"><a href="{% url 'account:my_profile'  %}" class="nav-link font-weight-bold text-uppercase">My Account</a></li>
+        <li class="nav-item"><a href="{% url 'account:avatar_create'  %}" class="nav-link font-weight-bold text-uppercase">Upload Avatar</a></li>
+
         {% else %}
         <li class="nav-item"><a href="{% url 'account:sign_up'   %}" class="nav-link font-weight-bold text-uppercase">Sign Up</a></li>
         {% endif %}

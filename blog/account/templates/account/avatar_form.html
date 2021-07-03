@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Profile | Avatar{% endblock %}
+{% block content %}
+
+
+<h1>Your profile</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}<br>
+
+    <button type="submit">Save avatar</button>
+</form>
+
+
+{% endblock %}

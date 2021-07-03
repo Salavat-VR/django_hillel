@@ -1,6 +1,6 @@
 from django import forms
 
-from account.models import User
+from account.models import User, Avatar
 from account.tasks import send_confirmation_email
 
 
@@ -51,3 +51,19 @@ class ChangePasswordForm(forms.ModelForm):
             self.add_error("confirm_new_password", "Password mismatch")
 
         return cleaned_data
+
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ('file_path',)
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=False):
+        instance = super().save(commit=False)
+        instance.user = self.request.user
+        instance.save()
+        return instance
