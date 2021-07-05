@@ -20,3 +20,31 @@ nginx config:
     }
 	}
 
+
+# Docker-related commands not to be forgotten
+
+# show all
+sudo docker container ls -a
+sudo docker image ls -a
+--------------------------------------------------
+# remove image  -f: forced
+sudo docker rmi -f _____(hash or name)
+
+# remove container  -f: forced
+sudo docker container rm _____(hash or name)
+--------------------------------------------------
+docker build -t ____(name)
+
+also check in Makefile
+
+
+sudo docker-compose build
+
+sudo docker-compose up -d
+or
+sudo docker-compose up --build
+
+sudo docker-compose down
+
+
+

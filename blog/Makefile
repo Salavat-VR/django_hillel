@@ -47,3 +47,24 @@ docker-run:
 #change the name in prod.
 docker-stop:
 	sudo docker container stop my_app
+
+docker-up:
+	docker-compose up -d --build
+
+docker-down:
+	docker-compose down
+
+celery-run:
+	cd src && celery -A core worker -l info
+
+copy-static:
+	# collected static so that we could operate them further
+	docker exec -it backend python blog/manage.py collectstatic --noinput
+	# copy from backend to our host
+	docker cp backend:/tmp/static_content/static /tmp/static
+	# copy from our host to nginx to be able manage static
+	docker cp /tmp/static nginx:/etc/nginx
+
+# for breakpoint()
+docker-runserver-breakpoint:
+	docker exec -it backend $(MANAGE) runserver 0.0.0.0:9000
