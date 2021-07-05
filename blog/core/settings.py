@@ -64,7 +64,6 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,6 +77,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'account',
     'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

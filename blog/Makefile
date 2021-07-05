@@ -20,6 +20,9 @@ migrate:
 shell_plus:
 	$(MANAGE) shell_plus --print-sql
 
+urls:
+	$(MANAGE) show_urls
+
 celery worker:
 	celery -A core worker -l info
 

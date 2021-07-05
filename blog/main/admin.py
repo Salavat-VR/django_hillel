@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from account.models import User, Avatar
-from .models import Author, Book, Category, Comment, Logger, Post, Subscriber
+from .models import Author, Post
 
 admin.site.register(Author)
 admin.site.register(Post)

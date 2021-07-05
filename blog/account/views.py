@@ -2,13 +2,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import UpdateView, CreateView
+from django.views.generic import UpdateView, CreateView, ListView
 
 from account.forms import UserRegistrationForm, ChangePasswordForm, AvatarForm
 from account.models import User, Avatar
 
 
-class MyProfile(LoginRequiredMixin, UpdateView):
+class MyProfileEdit(LoginRequiredMixin, UpdateView):
     queryset = User.objects.filter(is_active=True)
     fields = ("first_name", "last_name")
     success_url = reverse_lazy('home_page')
@@ -52,3 +52,12 @@ class AvatarCreate(LoginRequiredMixin, CreateView):
             form_class = self.get_form_class()
         return form_class(request=self.request, **self.get_form_kwargs())
 
+
+class MyProfile(LoginRequiredMixin, ListView):
+    queryset = User.objects.filter(is_active=True)
+    fields = ("first_name", "email", "file_path")
+    template_name = 'account/my_account.html'
+    success_url = reverse_lazy('home_page')
+
+    def get_object(self, queryset=None):
+        return self.request.user

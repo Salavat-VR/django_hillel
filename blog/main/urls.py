@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 
@@ -34,5 +34,5 @@ urlpatterns = [
     path(r'author/delete/<int:author_id>', views.AuthorDeleteView.as_view(), name='author_delete'),
 
     path('author/show/<int:author_id>', views.author_show, name='author_show'),
-
+    path('api/v1/', include('api.urls'))
 ]
