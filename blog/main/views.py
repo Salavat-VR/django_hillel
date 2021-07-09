@@ -1,3 +1,4 @@
+import django_tables2 as tables
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -186,9 +187,16 @@ class PostXlsx(View):
         return response
 
 
+class SimpleTable(tables.Table):
+    class Meta:
+        model = Post
+
+
 class PostListView(ListView):
     queryset = post_all()
     template_name = 'main/posts_all.html'
+    paginate_by = 10
+    table_class = SimpleTable
 
 
 class ContactUsView(CreateView):

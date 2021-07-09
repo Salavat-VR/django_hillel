@@ -5,6 +5,6 @@ from .views import PostApiViewSet
 api_name = 'api'
 
 router = DefaultRouter()
-router.register(prefix='api/v1/posts', viewset=PostApiViewSet, basename='post')
+router.register(prefix='posts', viewset=PostApiViewSet, basename='post')
 
 urlpatterns = router.urls
