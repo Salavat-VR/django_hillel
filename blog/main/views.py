@@ -149,13 +149,6 @@ def author_show(request, author_id):
     return render(request, 'main/author_show.html', context=context)
 
 
-def all_books(request):
-    books = Book.objects.all().only('title', 'author', 'category').select_related('author', 'category')
-    context = {
-        'data': books
-    }
-
-
 class BookTableView(tables.SingleTableView):
     queryset = Book.objects.all()
     table_class = BookTable
