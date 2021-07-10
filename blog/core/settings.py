@@ -100,6 +100,8 @@ MIDDLEWARE = [
     'main.middlewares.LogMiddlware'
 ]
 
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
 ROOT_URLCONF = 'core.urls'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

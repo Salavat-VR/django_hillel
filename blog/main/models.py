@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import django_tables2 as tables
 from django.db import models
 from django.utils.timezone import now
 
@@ -95,3 +96,13 @@ class ContactUs(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=120)
     message = models.TextField()
+
+
+class PostTable(tables.Table):
+    class Meta:
+        model = Post
+
+
+class BookTable(tables.Table):
+    class Meta:
+        model = Book
