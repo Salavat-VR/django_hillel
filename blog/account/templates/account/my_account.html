@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}Profile{% endblock %}
+{% block content %}
+
+
+<h1>Your profile</h1>
+
+First name:     {{ user.first_name }}<br>
+Email:      {{ user.email }}<br>
+
+<button><a href="{% url 'account:avatar_create'  %}">upload new avatar</a></button>
+
+
+<h2>Avatar</h2>
+
+{% for ava in object_list %}
+<div>
+    <img src="{{ava.file_path.url}}" alt="">
+</div>
+
+{% endfor %}
+
+{% endblock %}

@@ -48,3 +48,24 @@ sudo docker-compose down
 
 
 
+# working with api 
+
+implementing option_1
+
+### views.py
+
+	class PostSerializer(serializers.ModelSerializer):
+		class Meta:
+			model = Post
+			fields = ("id", "title", "description", "content", "created", "updated")
+	
+	
+	class PostAPIView(generics.RetrieveUpdateDestroyAPIView):
+		queryset = Post.objects.all().order_by("id")
+		serializer_class = PostSerializer
+
+### main/urls.py
+
+	path("api/v1/posts/", views.PostAPIView.as_view(), name='api_posts'),
+    path("api/v1/posts/<int:pk>/", views.PostAPIView.as_view(), name='api_post')
+

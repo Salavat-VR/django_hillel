@@ -64,7 +64,6 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,7 +77,16 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'account',
     'crispy_forms',
+    'rest_framework',
+    'drf_yasg',
+    "django_tables2",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -92,6 +100,8 @@ MIDDLEWARE = [
     'main.middlewares.LogMiddlware'
 ]
 
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
 ROOT_URLCONF = 'core.urls'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

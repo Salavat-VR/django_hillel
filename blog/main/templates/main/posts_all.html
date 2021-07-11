@@ -11,26 +11,9 @@
 <div class="container">
     <h1>There are all posts:</h1>
     <div class="payload">
-        <ul>
-            {% for post in post_list %}
-            <h2>
-                <a href="{% url 'post_show' post_id=post.id %}">{{ post.title }}</a>
-            </h2>
+        {% load django_tables2 %}
 
-            <p1>{{ post.description }} <br>
-            </p1>
-
-            <p>{{ post.content }} <br>
-            </p>
-
-
-            <hr>
-            {% endfor %}
-        </ul>
-
-
-    </div>
-
+        {% render_table table %}
 
 </div>
 

@@ -5,25 +5,10 @@
     <div class="payload">
         <h1>Books</h1>
 
+                {% load django_tables2 %}
 
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col">Category</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for book in data %}
-            <tr>
-                <th scope="row">{{ book.title }}</th>
-                <td>{{ book.author }}</td>
-                <td>{{ book.category }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        {% render_table table %}
+
     </div>
 </div>
 

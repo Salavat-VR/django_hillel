@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 
@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^favicon', RedirectView.as_view(
         url='main/static/imgs/favicon/my_favicon.ico')),
 
-    path('post', cache_page(60 * 15)(views.PostListView.as_view()), name='post_lists'),
+    path('post', cache_page(60 * 15)(views.PostsTableView.as_view()), name='post_lists'),
     path('post/create', views.post_create, name='post_create'),
     path('post/show/<int:post_id>', views.post_show, name='post_show'),
     path('post/xlsx', views.PostXlsx.as_view(), name='load_posts_via_xlsx'),
@@ -26,7 +26,7 @@ urlpatterns = [
     path('api/all_authors', cache_page(60 * 15)(views.all_authors), name='all_authors'),
     path('author/generate', views.author_generate, name='author_generate'),
 
-    path('books/all', views.all_books, name='all_books'),
+    path('books/all', views.BookTableView.as_view(), name='all_books'),
     path('categories/all', cache_page(60 * 15)(views.all_categories), name='all_categories'),
 
     path('contact-us', views.ContactUsView.as_view(), name='contact-us'),
@@ -34,5 +34,5 @@ urlpatterns = [
     path(r'author/delete/<int:author_id>', views.AuthorDeleteView.as_view(), name='author_delete'),
 
     path('author/show/<int:author_id>', views.author_show, name='author_show'),
-
+    path('api/v1/', include('api.urls'))
 ]

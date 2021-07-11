@@ -1,9 +1,10 @@
+import django_tables2 as tables
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import CreateView, DeleteView
 from faker import Faker
 from xlsxwriter.workbook import Workbook
 
@@ -11,7 +12,7 @@ from main.author_service import author_all
 from main.category_service import category_all
 from main.post_service import post_all, post_find
 from .forms import PostForm, SubsForm, CommentForm
-from .models import Author, Post, Subscriber, Comment, Book, ContactUs
+from .models import Author, Post, Subscriber, Comment, Book, ContactUs, PostTable, BookTable
 from .tasks import notification_by_email
 from .xlsx_service import get_simple_table_data
 
@@ -148,13 +149,11 @@ def author_show(request, author_id):
     return render(request, 'main/author_show.html', context=context)
 
 
-def all_books(request):
-    books = Book.objects.all().only('title', 'author', 'category').select_related('author', 'category')
-    context = {
-        'data': books
-    }
-
-    return render(request, 'main/all_books.html', context=context)
+class BookTableView(tables.SingleTableView):
+    queryset = Book.objects.all()
+    table_class = BookTable
+    template_name = 'main/all_books.html'
+    paginate_by = 3
 
 
 def all_categories(request):
@@ -186,9 +185,11 @@ class PostXlsx(View):
         return response
 
 
-class PostListView(ListView):
+class PostsTableView(tables.SingleTableView):
+    table_class = PostTable
     queryset = post_all()
     template_name = 'main/posts_all.html'
+    paginate_by = 3
 
 
 class ContactUsView(CreateView):
